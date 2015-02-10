@@ -1,0 +1,31 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+include /usr/share/cdbs/1/rules/debhelper.mk
+
+# Uncomment this to turn on verbose mode.
+DEB_VERBOSE_ALL=1
+DH_VERBOSE=1
+
+build/tracks::
+	# Patch out mysql dep, not needed atm
+	/bin/sed -i 's/^gem "mysql2".*//' Gemfile
+	# Serve assets via webrick until we have passenger in place
+	/bin/sed -i 's/\(config.serve_static_assets =\).*/\1 true/' config/environments/production.rb
+	# Thor is being a pain, get it manually
+	/bin/mkdir -p vendor/cache
+	/bin/cp debian/thor-0.19.1.gem vendor/cache
+	#
+	# Build the gem cache
+	#
+	/bin/cp config/site.yml.tmpl config/site.yml
+	/bin/cp debian/database.yml config/database.yml
+	/usr/bin/bundle pack
+	/usr/bin/bundle exec rake assets:precompile RAILS_ENV=production
+	/bin/rm config/site.yml
+	/bin/rm config/database.yml
+	# Somehow blank db sqlite files get added
+	/bin/rm db/production.sqlite3 || true
+	/bin/rm db/development.sqlite3 || true
+	# Drop the Gemfile.lock, the correct versions are in the cache
+	rm Gemfile.lock

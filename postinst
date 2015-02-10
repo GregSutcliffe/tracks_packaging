@@ -1,0 +1,76 @@
+#!/bin/sh
+# postinst script for tracks
+#
+# see: dh_installdeb(1)
+
+[ -n "${DEBUG}" ] && set -x
+set -e
+
+. /usr/share/debconf/confmodule
+
+LOGFILE='/var/log/tracks/install.log'
+HOME=/usr/share/tracks
+BUNDLE="/usr/bin/bundle"
+
+# if this script aborts with an error dpkg can hang if a debconf can
+# hang if daemons have been started
+trap db_stop EXIT
+
+# Add the "tracks" user and group
+getent group tracks >/dev/null || groupadd -r tracks
+getent passwd tracks >/dev/null || \
+    useradd -r -g tracks -d /usr/share/tracks -s /usr/sbin/nologin -c "Tracks" tracks
+
+chown -Rf tracks:tracks '/var/log/tracks'
+chown -Rf tracks:tracks '/var/lib/tracks'
+chown -Rf tracks:tracks '/var/cache/tracks'
+chmod 755 '/var/lib/tracks'
+chmod 755 '/var/lib/tracks/db'
+chmod 755 '/var/lib/tracks/public'
+chmod 755 '/var/lib/tracks/public/assets'
+chmod 755 '/var/cache/tracks'
+
+# Test for Gemfile.lock to determine the right action.
+cd $HOME
+if [ -f Gemfile.lock ]; then
+  CMD="$BUNDLE update --local"
+else
+  CMD="$BUNDLE install --binstubs --path ./vendor/ --local --no-prune --without development test"
+fi
+
+if [ ! -z "${DEBUG}" ]; then
+  $CMD
+else
+  $CMD 2>&1 >> $LOGFILE
+fi
+
+# Run a db:migrate if possible
+#if [ -f /usr/share/tracks/config/database.yml ]; then
+  if [ ! -z "${DEBUG}" ]; then
+    /usr/bin/tracks-rake db:migrate RAILS_ENV=production
+  else
+    /usr/bin/tracks-rake db:migrate >> $LOGFILE 2>&1 || true
+  fi
+#fi
+
+# Use this as a base for generating salt/secrets
+
+# Generate a static session token for signing cookies
+#if [ ! -f config/initializers/local_secret_token.rb ]; then
+#  touch config/initializers/local_secret_token.rb
+#  chmod 0660 config/initializers/local_secret_token.rb
+#  chgrp tracks config/initializers/local_secret_token.rb
+#  if [ ! -z "${DEBUG}" ]; then
+#    /usr/sbin/tracks-rake security:generate_token || true
+#  else
+#    /usr/sbin/tracks-rake security:generate_token >> $LOGFILE 2>&1 || true
+#  fi
+#  chmod 0640 config/initializers/local_secret_token.rb
+#fi
+
+# Own all the core files
+chown -Rf tracks:tracks '/usr/share/tracks'
+
+#DEBHELPER#
+
+exit 0

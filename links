@@ -1,0 +1,6 @@
+etc/tracks/database.yml	        usr/share/tracks/config/database.yml
+etc/tracks/site.yml	        usr/share/tracks/config/site.yml
+var/cache/tracks		usr/share/tracks/tmp
+var/lib/tracks/db		usr/share/tracks/db
+var/log/tracks			usr/share/tracks/log
+var/lib/tracks/public		usr/share/tracks/public

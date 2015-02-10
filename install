@@ -1,0 +1,15 @@
+# Install the basic application files
+debian/site.yml                          etc/tracks
+debian/database.yml                      etc/tracks
+debian/tracks-rake			 usr/bin/
+app                                      usr/share/tracks
+config                                   usr/share/tracks
+config.ru                                usr/share/tracks
+doc                                      usr/share/tracks
+Gemfile                                  usr/share/tracks
+lib                                      usr/share/tracks
+Rakefile                                 usr/share/tracks
+vendor/assets                            usr/share/tracks/vendor
+vendor/cache                             usr/share/tracks/vendor
+public                                   var/lib/tracks
+db                                       var/lib/tracks

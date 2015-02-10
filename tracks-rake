@@ -1,0 +1,16 @@
+#!/bin/bash
+USERNAME=$(/usr/bin/id -un)
+RAKE_CMD=/usr/share/tracks/bin/rake
+
+die() {
+  echo $*; exit 1
+}
+
+cd ~tracks || die "Cannot change to tracks home directory"
+CMD="$RAKE_CMD $*"
+if [ $USERNAME = tracks ]; then
+  RAILS_ENV=production $CMD
+else
+  su - tracks -s /bin/bash -c "RAILS_ENV=production $CMD"
+fi
+
