@@ -21,7 +21,8 @@ build/tracks::
 	/bin/cp config/site.yml.tmpl config/site.yml
 	/bin/cp debian/database.yml config/database.yml
 	/usr/bin/bundle pack
-	/usr/bin/bundle exec rake assets:precompile RAILS_ENV=production
+	# This is causing issues...
+	#/usr/bin/bundle exec rake assets:precompile RAILS_ENV=production
 	/bin/rm config/site.yml
 	/bin/rm config/database.yml
 	# Somehow blank db sqlite files get added

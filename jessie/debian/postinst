@@ -27,7 +27,7 @@ chown -Rf tracks:tracks '/var/cache/tracks'
 chmod 755 '/var/lib/tracks'
 chmod 755 '/var/lib/tracks/db'
 chmod 755 '/var/lib/tracks/public'
-chmod 755 '/var/lib/tracks/public/assets'
+#chmod 755 '/var/lib/tracks/public/assets'
 chmod 755 '/var/cache/tracks'
 
 # Test for Gemfile.lock to determine the right action.
