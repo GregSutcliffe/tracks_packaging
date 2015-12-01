@@ -1,5 +1,15 @@
-tracks (2.3.0-0.1) stable; urgency=low
+tracks (2.3.0-1~alpha2) stable; urgency=low
+
+  * Switch to quilt patching
+  * Patch out mysql2 and cache-digests
+  * Patch static asset serving until apache is done
+
+ -- Greg Sutcliffe <greg.sutcliffe@gmail.com>  Tue, 01 Dec 2015 01:45:00 +0000
+
+tracks (2.3.0-1~alpha1) stable; urgency=low
 
   * Initial build
+  * Sqlite3 only (mysql/psql to come)
+  * Webrick only (passenger/apache to come)
 
- -- Greg Sutcliffe <greg.sutcliffe@gmail.com>  Sat, 17 Jan 2015 20:39:24 +0000
+ -- Greg Sutcliffe <greg.sutcliffe@gmail.com>  Mon, 30 Nov 2015 20:39:24 +0000
