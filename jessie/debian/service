@@ -1,0 +1,13 @@
+[Unit]
+Description=Tracks Webrick service
+After=network.target
+
+[Service]
+WorkingDirectory=/usr/share/tracks
+EnvironmentFile=/etc/default/tracks
+PIDFile=/var/cache/tracks/tracks.pid
+User=tracks
+ExecStart=/usr/bin/bundle exec rails server -b ${TRACKS_IFACE} -p ${TRACKS_PORT} -e ${TRACKS_ENV}
+
+[Install]
+WantedBy=default.target

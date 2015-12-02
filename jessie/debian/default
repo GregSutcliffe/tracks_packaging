@@ -5,15 +5,15 @@ START=no
 TRACKS_HOME=/usr/share/tracks
 
 # the network interface which tracks web server is running at
-#TRACKS_IFACE=0.0.0.0
+TRACKS_IFACE=0.0.0.0
 
 # the port which tracks web server is running at
 # note that if the tracks user is not root, it has to be a > 1024
 # For non-root port 80, consider using Apache+Passenger
-#TRACKS_PORT=3000
+TRACKS_PORT=3000
 
 # the user which runs the web interface
-#TRACKS_USER=tracks
+TRACKS_USER=tracks
 
 # the rails environment in which tracks runs
-#TRACKS_ENV=production
+TRACKS_ENV=production

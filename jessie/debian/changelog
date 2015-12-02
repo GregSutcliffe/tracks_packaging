@@ -1,3 +1,9 @@
+tracks (2.3.0-1~alpha3) stable; urgency=low
+
+  * Add systemd service file
+
+ -- Greg Sutcliffe <greg.sutcliffe@gmail.com>  Wed, 02 Dec 2015 10:23:16 +0000
+
 tracks (2.3.0-1~alpha2) stable; urgency=low
 
   * Switch to quilt patching
