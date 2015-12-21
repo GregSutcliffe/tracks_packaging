@@ -1,3 +1,2 @@
-01-remove-mysql-gem
-02-serve-static-assets
-03-remove-cache-digests-gem
+01-serve-static-assets
+02-remove-cache-digests-gem
