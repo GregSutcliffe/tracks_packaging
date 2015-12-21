@@ -1,3 +1,11 @@
+tracks (2.3.0-2) stable; urgency=low
+
+  * 2.3.0-2 released
+  * Added mysql support back in
+  * Added example config to the database.yml
+
+ -- Greg Sutcliffe <greg.sutcliffe@gmail.com>  Mon, 21 Dec 2015 22:58:58 +0000
+
 tracks (2.3.0-1) stable; urgency=low
 
   * Release first cut of the package

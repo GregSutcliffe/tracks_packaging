@@ -4,17 +4,16 @@ Section: web
 Priority: extra
 Standards-Version: 3.9.1
 Build-Depends: debhelper (>= 7), cdbs, bundler (>= 1.7), ruby-dev,
-               git | git-core, libsqlite3-dev, libxml2-dev, build-essential,
-               libzip-dev
+               git | git-core, libsqlite3-dev, libxml2-dev, libmysqlclient-dev,
+               build-essential, libzip-dev
 Homepage: http://http://www.getontracks.org/
 
 Package: tracks
 Architecture: any
 Section: web
 Priority: extra
-Depends: ruby, bundler (>= 1.7),
-         ruby-dev, build-essential,
-         libsqlite3-dev, libxml2-dev,
+Depends: ruby, bundler (>= 1.7), ruby-dev, build-essential,
+         libsqlite3-dev, libmysqlclient-dev, libxml2-dev,
          libzip-dev, ${misc:Depends}
 Description: Open source Rails Getting Things Done (GTD) implementation.
  Tracks is a web-based application to help you implement David Allen’s
